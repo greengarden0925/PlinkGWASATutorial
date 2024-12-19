@@ -5,5 +5,5 @@ Tutorial of GWAS analysis using Plink and R
 
 [Click here to read tutorial](/Tutorial.md)
 
-![image](/111.png)
-![image](/123.jpg)
+![image](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flower_poster_2.jpg/330px-Flower_poster_2.jpg)
+
