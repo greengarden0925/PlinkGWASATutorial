@@ -1,19 +1,14 @@
 # Plink介紹
 
-談起Plink相信熟悉的人更定都會知道，**這是一個全面的基因組分析工具集**，具有很多的小功能，在SNP數據統計，過濾，GWAS分析中都可以用得上**，而且速度非常的快**，堪稱是生物信息分析軟件中**神器之一**。
+談起Plink相信熟悉的人更定都會知道，**這是一個全面的基因組分析工具集**，具有很多的小功能，在SNP數據統計，過濾，GWAS分析中都可以用得上，而且速度非常的快，堪稱是生物信息分析軟件中神器之一。
 
 PLINK是一個**免費的開源全基因組關聯分析工具集**，旨在以計算有效的方式執行一系列基本的大規模分析，由Shaun Purcell在馬薩諸塞州綜合醫院（MGH）的人類基因研究中心（CHGR）和哈佛大學和麻省理工學院的Broad研究所共同開發的。它最初是爲人類數據，但**新的PLINK 1.9以上的版本**也可用於**非模式生物的基因組數據**。
 
 其功能非常強大，**簡單列舉一下相對應的功能**：
-
 1. **數據管理**： SNP數據格式的轉換，合併兩個或多個文件，提取SNP子集，以二進制文件格式壓縮數據等。
-
 2. **質量控制的SNP數據統計**： 計算丟失基因型率，等位基因，基因型頻率，HWE測試，個體和個體對的近親繁殖，IBS和IBD統計，LD區域計算等。
-
 3. **GWAS關聯分析**
-
 4. **Meta分析**
-
 # Plink指令dictionary
 
 [PLINK：全基因組資料分析工具集](https://zzz.bwh.harvard.edu/plink/reference.shtml)
@@ -22,9 +17,9 @@ PLINK是一個**免費的開源全基因組關聯分析工具集**，旨在以�
 
 教學 ：[通用連結](https://zzz.bwh.harvard.edu/plink/gplink.shtml)
 
-```
+
 gPLINK 是一個 自由地-可用的，基於Java 軟體包： 是一個圖形使用者介面允許建構許多常見的 PLINK 操作 提供簡單的專案管理工具和分析日誌 允許資料和計算位於單獨的伺服器上（透過 SSH） 促進與 Haploview 的集成
-```
+
 **下載並安裝** \
 您首先需要在電腦上安裝最新版本的 Java、PLINK 和 Haploview。 \
 ***請遵循以下所有 4 個步驟***：
@@ -35,7 +30,7 @@ gPLINK 是一個 自由地-可用的，基於Java 軟體包： 是一個圖形�
 
 3. 支援 gPLINK 的 Haploview 測試版可以從以下位置取得 [這一頁](http://www.broad.mit.edu/mpg/haploview/beta.php)
 
-4. **後** 完成以上三步驟後，點選下載最新的gPLINK（版本2.050） [這裡是 JAR 文件](https://zzz.bwh.harvard.edu/plink/dist/gPLINK-2.050.zip)(as a zipped archive). (下載最新版gPlink，並解壓縮為gPLINK。罐）
+4. 完成以上三步驟後，點選下載最新的gPLINK（版本2.050） [這裡是 JAR 文件](https://zzz.bwh.harvard.edu/plink/dist/gPLINK-2.050.zip)(as a zipped archive). (下載最新版gPlink，並解壓縮為gPLINK。罐）
 
 如果您下載此文件，請參閱 [GPL v2 授權。](https://zzz.bwh.harvard.edu/plink/gplic.txt) 原始碼可根據要求提供，並將很快發布。
 
@@ -43,10 +38,10 @@ gPLINK 是一個 自由地-可用的，基於Java 軟體包： 是一個圖形�
 在 Windows 中，雙擊 gPLINK.jar 檔案應該可以運作 \
 如果沒有（以及在所有其他平台上），請在命令列提示符號下鍵入
 
+```java
+java -jar gPLINK.jar
 ```
-爪哇-罐gPLINK。罐
-```
-![Enter image alt description](Images/DaJ_Image_1.png)
+![Enter image alt description](https://github.com/greengarden0925/PlinkGWASTutorial/blob/main/Images/DaJ_Image_1.png)
 界面化的操作
 
 # Python中執行plink
@@ -82,7 +77,16 @@ system("plink")
 ## 語法撰寫技巧
 
 ```
-shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")   ##do LD r2 plink_bin="你plink.exe檔案路徑位置" fun2 <- paste0(    shQuote(plink_bin, type=shell),    " --bfile ", shQuote(bfile, type=shell),    " --extract ", shQuote(fn, type=shell),    " --r2 ",    " --keep-allele-order ",    " --out ", shQuote(fn, type=shell)  )
+shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")   ##do LD r2
+ plink_bin="你plink.exe檔案路徑位置"
+ fun2 <- paste0(
+    shQuote(plink_bin, type=shell),
+    " --bfile ", shQuote(bfile, type=shell),
+    " --extract ", shQuote(fn, type=shell),
+    " --r2 ",
+    " --keep-allele-order ",
+    " --out ", shQuote(fn, type=shell)
+  )
 ```
 # 建立R project準備執行plink
 
@@ -107,7 +111,15 @@ shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")   ##do LD r2 p
 
 注意路徑位置要用"/"而非"\"，注意若工作路徑有空格要用"\_"替代，如:
 ```
-#到plink.exe檔案路徑 #因為我們剛才已經將plink2.exe(或plink.exe)放到R語言路徑下，所以轉向到這個資料夾cd /c/Program\ Files/R/R-4.3.1/bin/x64  #產生環境變數檔案mkdir ~/bin#將plink2.exe或plink.exe複製到環境變數檔案，下面指令選一個執行就好cp plink.exe ~/bin/ cp plink2.exe ~/bin/ #回到上一層路徑cd ..#執行plink或plink2若出現訊息就表示OK，下面指令選一個執行就好plink plink2  
+#到plink.exe檔案路徑 #因為我們剛才已經將plink2.exe(或plink.exe)放到R語言路徑下，所以轉向到這個資料夾
+cd /c/Program\ Files/R/R-4.3.1/bin/x64  #產生環境變數檔案
+mkdir ~/bin
+#將plink2.exe或plink.exe複製到環境變數檔案，下面指令選一個執行就好
+cp plink.exe ~/bin/ cp plink2.exe ~/bin/ 
+#回到上一層路徑
+cd ..
+#執行plink或plink2若出現訊息就表示OK，下面指令選一個執行就好
+plink plink2  
 ```
 # R studio terminal 環境下執行Git bash
 
@@ -200,7 +212,8 @@ PLINK接受VCF文件作爲輸入，但在PLINK中使用**的首選格式是**帶
 使用plink來轉換：
 
 ```
-# vcf轉ped和mapplink --vcf file.vcf --recode --out file
+# vcf轉ped和map
+plink --vcf file.vcf --recode --out file
 ```
 ### **ped格式文件**
 
@@ -312,14 +325,16 @@ wc -l test.map test.ped
 預覽一下ped文件，跳出畫面輸入 "q”
 
 ```
-#顯示前筆資料less -S test.ped
+#顯示前筆資料
+less -S test.ped
 ```
 ![Enter image alt description](Images/XQH_Image_34.png)
 
 預覽一下map文件
 
 ```
-#顯示前筆資料less -S test.map
+#顯示前筆資料
+less -S test.map
 ```
 ![Enter image alt description](Images/8yR_Image_35.png)
 
@@ -342,15 +357,25 @@ wc -l test.map test.ped
 ![Enter image alt description](Images/CMd_Image_38.png)
 
 ```
-#顯示前筆資料，不看資料了要按q退出 less -S plink.imiss  #個體缺失位點統計預覽：" 第一欄(FID)為家系ID，第二欄(IID)為個體ID，第三欄(MISS_PHENO)是否表型缺失，第四欄(N_MISS)缺失的SNP個數，第五欄N_GENO)總SNP個數，第六欄(F_MISS=N_MISS/N_GENO)缺失率。 less -S plink.lmiss  #SNP缺失的個體數文件預覽：" 第一欄(CHR)為染色體，第二欄(SNP)為SNP名稱，第三欄(N_MISS)為缺失個數，第四欄(N_GENO)為總個數，第五欄(F_MISS)為缺失率。 
+#顯示前筆資料，不看資料了要按q退出 less -S plink.imiss  #個體缺失位點統計預覽：" 第一欄(FID)為家系ID，第二欄(IID)為個體ID，第三欄(MISS_PHENO)是否表型缺失，第四欄(N_MISS)缺失的SNP個數，第五欄N_GENO)總SNP個數，第六欄(F_MISS=N_MISS/N_GENO)缺失率。 
+less -S plink.lmiss  #SNP缺失的個體數文件預覽：" 第一欄(CHR)為染色體，第二欄(SNP)為SNP名稱，第三欄(N_MISS)為缺失個數，第四欄(N_GENO)為總個數，第五欄(F_MISS)為缺失率。 
 ```
 用R繪製SNP及個體數據缺失圖並存為pdf檔
 
 ```
-indmiss=read.table(file="plink.imiss", header=TRUE)snpmiss=read.table(file="plink.lmiss", header=TRUE)# read data into R pdf("histimiss.pdf") #indicates pdf format and gives title to filehist(indmiss[,6],main="Histogram individual missingness") #selects column 6, names header of filedev.off() # shuts down the current device pdf("histlmiss.pdf") hist(snpmiss[,5],main="Histogram SNP missingness")   dev.off() # shuts down the current device 
+indmiss=read.table(file="plink.imiss", header=TRUE)
+snpmiss=read.table(file="plink.lmiss", header=TRUE)
+# read data into R 
+
+pdf("histimiss.pdf") #indicates pdf format and gives title to file
+hist(indmiss[,6],main="Histogram individual missingness") #selects column 6, names header of file
+dev.off() # shuts down the current device 
+pdf("histlmiss.pdf") 
+hist(snpmiss[,5],main="Histogram SNP missingness")   dev.off() # shuts down the current device 
 ```
 ```
-#因為教程已經有將這段語法寫成hist_miss.R也可以直接執行 source("hist_miss.R") 
+#因為教程已經有將這段語法寫成hist_miss.R也可以直接執行 
+source("hist_miss.R") 
 ```
 「基因型個體缺失率统计：」
 
@@ -390,19 +415,46 @@ indmiss=read.table(file="plink.imiss", header=TRUE)snpmiss=read.table(file="pli
 「之前的为：」
 
 ```
-1457897 test.map    165 test.ped
+1457897 test.map
+    165 test.ped
 ```
 「现在的为：」
 
 ```
-1430443 test.map    165 test.ped
+1430443 test.map
+    165 test.ped
 ```
 可以看出，过滤了2万多个位点。
 
 从当时的log日志里也可以看出这一点：
 
 ```
-PLINK v1.90b6.5 64-bit (13 Sep 2018)           www.cog-genomics.org/plink/1.9/(C) 2005-2018 Shaun Purcell, Christopher Chang   GNU General Public License v3Logging to HapMap_3_r3_2.log.Options in effect:  --bfile HapMap_3_r3_1  --geno 0.02  --make-bed  --out HapMap_3_r3_2515185 MB RAM detected; reserving 257592 MB for main workspace.1457897 variants loaded from .bim file.165 people (80 males, 85 females) loaded from .fam.112 phenotype values loaded from .fam.Using 1 thread (no multithreaded calculations invoked).Before main variant filters, 112 founders and 53 nonfounders present.Calculating allele frequencies... done.Warning: 225 het. haploid genotypes present (see HapMap_3_r3_2.hh ); manycommands treat these as missing.Total genotyping rate is 0.997378.27454 variants removed due to missing genotype data (--geno).1430443 variants and 165 people pass filters and QC.Among remaining phenotypes, 56 are cases and 56 are controls.  (53 phenotypesare missing.)--make-bed to HapMap_3_r3_2.bed + HapMap_3_r3_2.bim + HapMap_3_r3_2.fam ...done.可以看到--geno，过滤了27454个位点。
+PLINK v1.90b6.5 64-bit (13 Sep 2018)           www.cog-genomics.org/plink/1.9/
+(C) 2005-2018 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to HapMap_3_r3_2.log.
+Options in effect:
+  --bfile HapMap_3_r3_1
+  --geno 0.02
+  --make-bed
+  --out HapMap_3_r3_2
+
+515185 MB RAM detected; reserving 257592 MB for main workspace.
+1457897 variants loaded from .bim file.
+165 people (80 males, 85 females) loaded from .fam.
+112 phenotype values loaded from .fam.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 112 founders and 53 nonfounders present.
+Calculating allele frequencies... done.
+Warning: 225 het. haploid genotypes present (see HapMap_3_r3_2.hh ); many
+commands treat these as missing.
+Total genotyping rate is 0.997378.
+27454 variants removed due to missing genotype data (--geno).
+1430443 variants and 165 people pass filters and QC.
+Among remaining phenotypes, 56 are cases and 56 are controls.  (53 phenotypes
+are missing.)
+--make-bed to HapMap_3_r3_2.bed + HapMap_3_r3_2.bim + HapMap_3_r3_2.fam ...
+done.
+可以看到--geno，过滤了27454个位点。
 ```
 ```
 #再過濾個體缺失率高於 2% 的個體 plink --bfile HapMap_3_r3_2 --mind 0.02 --make-bed --out HapMap_3_r3_3
@@ -410,7 +462,28 @@ PLINK v1.90b6.5 64-bit (13 Sep 2018)           www.cog-genomics.org/plink/1.9/(
 查看log 沒有個案被移除
 
 ```
-Options in effect:  --bfile HapMap_3_r3_2  --make-bed  --mind 0.02  --out HapMap_3_r3_3515185 MB RAM detected; reserving 257592 MB for main workspace.1430443 variants loaded from .bim file.165 people (80 males, 85 females) loaded from .fam.112 phenotype values loaded from .fam.0 people removed due to missing genotype data (--mind).Using 1 thread (no multithreaded calculations invoked).Before main variant filters, 112 founders and 53 nonfounders present.Calculating allele frequencies... done.Warning: 179 het. haploid genotypes present (see HapMap_3_r3_3.hh ); manycommands treat these as missing.Total genotyping rate is 0.997899.1430443 variants and 165 people pass filters and QC.Among remaining phenotypes, 56 are cases and 56 are controls.  (53 phenotypesare missing.)--make-bed to HapMap_3_r3_3.bed + HapMap_3_r3_3.bim + HapMap_3_r3_3.fam ...done.
+Options in effect:
+  --bfile HapMap_3_r3_2
+  --make-bed
+  --mind 0.02
+  --out HapMap_3_r3_3
+
+515185 MB RAM detected; reserving 257592 MB for main workspace.
+1430443 variants loaded from .bim file.
+165 people (80 males, 85 females) loaded from .fam.
+112 phenotype values loaded from .fam.
+0 people removed due to missing genotype data (--mind).
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 112 founders and 53 nonfounders present.
+Calculating allele frequencies... done.
+Warning: 179 het. haploid genotypes present (see HapMap_3_r3_3.hh ); many
+commands treat these as missing.
+Total genotyping rate is 0.997899.
+1430443 variants and 165 people pass filters and QC.
+Among remaining phenotypes, 56 are cases and 56 are controls.  (53 phenotypes
+are missing.)
+--make-bed to HapMap_3_r3_3.bed + HapMap_3_r3_3.bim + HapMap_3_r3_3.fam ...
+done.
 ```
 沒有過濾掉個體共165為，SNP為1430443個點位
 
@@ -426,7 +499,31 @@ plink --bfile HapMap_3_r3_1 --geno 0.02 --mind 0.02 --make-bed --out HapMap_3_r3
 plink日誌：
 
 ```
-Options in effect:  --bfile HapMap_3_r3_1  --geno 0.02  --make-bed  --mind 0.02  --out HapMap_3_r3_5515185 MB RAM detected; reserving 257592 MB for main workspace.1457897 variants loaded from .bim file.165 people (80 males, 85 females) loaded from .fam.112 phenotype values loaded from .fam.1 person removed due to missing genotype data (--mind).ID written to HapMap_3_r3_5.irem .Using 1 thread (no multithreaded calculations invoked).Before main variant filters, 112 founders and 52 nonfounders present.Calculating allele frequencies... done.Warning: 225 het. haploid genotypes present (see HapMap_3_r3_5.hh ); manycommands treat these as missing.Total genotyping rate in remaining samples is 0.997486.26686 variants removed due to missing genotype data (--geno).1431211 variants and 164 people pass filters and QC.Among remaining phenotypes, 56 are cases and 56 are controls.  (52 phenotypesare missing.)--make-bed to HapMap_3_r3_5.bed + HapMap_3_r3_5.bim + HapMap_3_r3_5.fam ...done.
+Options in effect:
+  --bfile HapMap_3_r3_1
+  --geno 0.02
+  --make-bed
+  --mind 0.02
+  --out HapMap_3_r3_5
+
+515185 MB RAM detected; reserving 257592 MB for main workspace.
+1457897 variants loaded from .bim file.
+165 people (80 males, 85 females) loaded from .fam.
+112 phenotype values loaded from .fam.
+1 person removed due to missing genotype data (--mind).
+ID written to HapMap_3_r3_5.irem .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 112 founders and 52 nonfounders present.
+Calculating allele frequencies... done.
+Warning: 225 het. haploid genotypes present (see HapMap_3_r3_5.hh ); many
+commands treat these as missing.
+Total genotyping rate in remaining samples is 0.997486.
+26686 variants removed due to missing genotype data (--geno).
+1431211 variants and 164 people pass filters and QC.
+Among remaining phenotypes, 56 are cases and 56 are controls.  (52 phenotypes
+are missing.)
+--make-bed to HapMap_3_r3_5.bed + HapMap_3_r3_5.bim + HapMap_3_r3_5.fam ...
+done.
 ```
 ## Step2-性別質控
 
@@ -465,7 +562,21 @@ less -S plink.sexcheck
 **「使用R語言作圖：」**
 
 ```
-gender=read.table("plink.sexcheck",header=T,as.is=T)pdf("Gender_check.pdf")hist(gender[,6],main="Gender",xlab="F")dev.off()pdf("Men_check.pdf")male=subset(gender,gender$PEDSEX==1)hist(male[,6],main="Men",xlab="F")dev.off()pdf("Women_check.pdf")female=subset(gender,gender$PEDSEX==2)hist(female[,6],main="Women",xlab="F")dev.off()
+gender=read.table("plink.sexcheck",header=T,as.is=T)
+
+pdf("Gender_check.pdf")
+hist(gender[,6],main="Gender",xlab="F")
+dev.off()
+
+pdf("Men_check.pdf")
+male=subset(gender,gender$PEDSEX==1)
+hist(male[,6],main="Men",xlab="F")
+dev.off()
+
+pdf("Women_check.pdf")
+female=subset(gender,gender$PEDSEX==2)
+hist(female[,6],main="Women",xlab="F")
+dev.off()
 ```
 |  |  |
 |---|---|
@@ -513,12 +624,17 @@ plink --bfile HapMap_3_r3_5 --impute-sex --make-bed --out HapMap_3_r3_6
 **「保留或去掉個體：」**
 
 ```
---keep < filename >         --remove < filename >--keep-fam <filename>         --remove-fam <filename>
+--keep < filename >         
+--remove < filename >
+
+--keep-fam <filename>         
+--remove-fam <filename>
 ```
 **「保留或去掉SNP：」**
 
 ```
---extract['range'] <filename>        --exclude['range'] <filename>
+--extract['range'] <filename>        
+--exclude['range'] <filename>
 ```
 ## Step3- Minor allele frequency (MAF)過濾
 
@@ -717,7 +833,15 @@ plink --bfile HapMap_3_r3_8 --hwe 1e-4 --make-bed --out HapMap_3_r3_9
 R代碼：
 
 ```
-hwe<-read.table(file="plink.hwe",header=TRUE)pdf("histhwe.pdf")hist(hwe[,9],main="HistogramHWE")dev.off()hwe_zoom<-read.table(file="plinkzoomhwe.hwe",header=TRUE)pdf("histhwe_below_theshold.pdf")hist(hwe_zoom[,9],main="HistogramHWE:stronglydeviatingSNPsonly")dev.off()
+hwe<-read.table(file="plink.hwe",header=TRUE)
+pdf("histhwe.pdf")
+hist(hwe[,9],main="HistogramHWE")
+dev.off()
+
+hwe_zoom<-read.table(file="plinkzoomhwe.hwe",header=TRUE)
+pdf("histhwe_below_theshold.pdf")
+hist(hwe_zoom[,9],main="HistogramHWE:stronglydeviatingSNPsonly")
+dev.off()
 ```
 |  |  |
 |---|---|
@@ -829,7 +953,11 @@ less -S R_check.het
 R代碼：
 
 ```
-het <- read.table("R_check.het", head=TRUE)pdf("heterozygosity.pdf")het$HET_RATE = (het$"N.NM." - het$"O.HOM.")/het$"N.NM."hist(het$HET_RATE, xlab="Heterozygosity Rate", ylab="Frequency", main= "Heterozygosity Rate")dev.off()
+het <- read.table("R_check.het", head=TRUE)
+pdf("heterozygosity.pdf")
+het$HET_RATE = (het$"N.NM." - het$"O.HOM.")/het$"N.NM."
+hist(het$HET_RATE, xlab="Heterozygosity Rate", ylab="Frequency", main= "Heterozygosity Rate")
+dev.off()
 ```
 可視化：
 
@@ -876,7 +1004,22 @@ plink --bfile HapMap_3_r3_10 --genome --min 0.2 --out pihat_min0.2
 说明文档：
 
 ```
---genome invokes an IBS/IBD computation, and then writes a report with the following fields to plink.genome:FID1	Family ID for first sampleIID1	Individual ID for first sampleFID2	Family ID for second sampleIID2	Individual ID for second sampleRT	Relationship type inferred from .fam/.ped fileEZ	IBD sharing expected value, based on just .fam/.ped relationshipZ0	P(IBD=0)Z1	P(IBD=1)Z2	P(IBD=2)PI_HAT	Proportion IBD, i.e. P(IBD=2) + 0.5*P(IBD=1)PHE	Pairwise phenotypic code (1, 0, -1 = AA, AU, and UU pairs, respectively)DST	IBS distance, i.e. (IBS2 + 0.5*IBS1) / (IBS0 + IBS1 + IBS2)PPC	IBS binomial testRATIO	HETHET : IBS0 SNP ratio (expected value 2)
+--genome invokes an IBS/IBD computation, and then writes a report with the following fields to plink.genome:
+
+FID1	Family ID for first sample
+IID1	Individual ID for first sample
+FID2	Family ID for second sample
+IID2	Individual ID for second sample
+RT	Relationship type inferred from .fam/.ped file
+EZ	IBD sharing expected value, based on just .fam/.ped relationship
+Z0	P(IBD=0)
+Z1	P(IBD=1)
+Z2	P(IBD=2)
+PI_HAT	Proportion IBD, i.e. P(IBD=2) + 0.5*P(IBD=1)
+PHE	Pairwise phenotypic code (1, 0, -1 = AA, AU, and UU pairs, respectively)
+DST	IBS distance, i.e. (IBS2 + 0.5*IBS1) / (IBS0 + IBS1 + IBS2)
+PPC	IBS binomial test
+RATIO	HETHET : IBS0 SNP ratio (expected value 2)
 ```
 ### **2. 提取Z1大于0.9的個體体**
 
@@ -894,7 +1037,26 @@ awk '{if($8>0.9) print $0}' pihat_min0.2.genome  > zoom_pihat.genome
 R代码
 
 ```
-pdf("relatedness.pdf")relatedness = read.table("pihat_min0.2.genome", header=T)par(pch=16, cex=1)with(relatedness,plot(Z0,Z1, xlim=c(0,1), ylim=c(0,1), type="n"))with(subset(relatedness,RT=="PO") , points(Z0,Z1,col=4))with(subset(relatedness,RT=="UN") , points(Z0,Z1,col=3))legend(1,1, xjust=1, yjust=1, legend=unique(relatedness$RT), pch=16, col=c(4,3)) dev.off()pdf("zoom_relatedness.pdf")relatedness_zoom = read.table("zoom_pihat.genome", header=T)par(pch=16, cex=1)with(relatedness_zoom,plot(Z0,Z1, xlim=c(0,0.02), ylim=c(0.98,1), type="n"))with(subset(relatedness_zoom,RT=="PO") , points(Z0,Z1,col=4))with(subset(relatedness_zoom,RT=="UN") , points(Z0,Z1,col=3))legend(0.02,1, xjust=1, yjust=1, legend=unique(relatedness$RT), pch=16, col=c(4,3)) dev.off()pdf("hist_relatedness.pdf")relatedness = read.table("pihat_min0.2.genome", header=T)hist(relatedness[,10],main="Histogram relatedness", xlab= "Pihat")dev.off() 
+pdf("relatedness.pdf")
+relatedness = read.table("pihat_min0.2.genome", header=T)
+par(pch=16, cex=1)
+with(relatedness,plot(Z0,Z1, xlim=c(0,1), ylim=c(0,1), type="n"))
+with(subset(relatedness,RT=="PO") , points(Z0,Z1,col=4))
+with(subset(relatedness,RT=="UN") , points(Z0,Z1,col=3))
+legend(1,1, xjust=1, yjust=1, legend=unique(relatedness$RT), pch=16, col=c(4,3)) dev.off()
+
+pdf("zoom_relatedness.pdf")
+relatedness_zoom = read.table("zoom_pihat.genome", header=T)
+par(pch=16, cex=1)
+with(relatedness_zoom,plot(Z0,Z1, xlim=c(0,0.02), ylim=c(0.98,1), type="n"))
+with(subset(relatedness_zoom,RT=="PO") , points(Z0,Z1,col=4))
+with(subset(relatedness_zoom,RT=="UN") , points(Z0,Z1,col=3))
+legend(0.02,1, xjust=1, yjust=1, legend=unique(relatedness$RT), pch=16, col=c(4,3)) dev.off()
+
+pdf("hist_relatedness.pdf")
+relatedness = read.table("pihat_min0.2.genome", header=T)
+hist(relatedness[,10],main="Histogram relatedness", xlab= "Pihat")
+dev.off() 
 ```
 ### **4. 刪除親子關係的個體**
 
@@ -1112,7 +1274,8 @@ plink --bfile test --logistic --covar [covariate檔案名稱] --covar-name [指�
 把檔改名字，方便後面代碼裡作圖，這樣不用修改代碼了
 
 ```
-#複製result.assoc 並另存為assoc_results cp result.assoc assoc_results #複製result_logistic.assoc.logistic 並另存為logistic_results.assoc.logisticcp result_logistic.assoc.logistic logistic_results.assoc.logistic
+#複製result.assoc 並另存為assoc_results cp result.assoc assoc_results #複製result_logistic.assoc.logistic 並另存為logistic_results.assoc.logistic
+cp result_logistic.assoc.logistic logistic_results.assoc.logistic
 ```
 ![Enter image alt description](Images/lIG_Image_100.png)
 
@@ -1126,7 +1289,16 @@ plink --bfile test --logistic --covar [covariate檔案名稱] --covar-name [指�
 ### **3.1 曼哈頓圖**
 
 ```
-install.packages("qqman")library(qqman) #以assoc分析資料繪圖results_as <- read.table("assoc_results", head=TRUE)jpeg("assoc_manhattan.jpeg")manhattan(results_as,chr="CHR",bp="BP",p="P",snp="SNP", main = "Manhattan plot: assoc")dev.off() #以logistic分析資料繪圖results_log <- read.table("logistic_results.assoc2.logistic", head=TRUE)head(results_log) jpeg("Logistic_manhattan.jpeg")manhattan(results_log,chr="CHR",bp="BP",p="P",snp="SNP", main = "Manhattan plot: logistic")dev.off()
+install.packages("qqman")
+library(qqman) #以assoc分析資料繪圖
+results_as <- read.table("assoc_results", head=TRUE)
+jpeg("assoc_manhattan.jpeg")
+manhattan(results_as,chr="CHR",bp="BP",p="P",snp="SNP", main = "Manhattan plot: assoc")
+dev.off() #以logistic分析資料繪圖
+results_log <- read.table("logistic_results.assoc2.logistic", head=TRUE)
+head(results_log) jpeg("Logistic_manhattan.jpeg")
+manhattan(results_log,chr="CHR",bp="BP",p="P",snp="SNP", main = "Manhattan plot: logistic")
+dev.off()
 ```
 | assoc的卡方檢驗結果： | logistic邏輯斯回歸結果： |
 |---|---|
@@ -1142,7 +1314,18 @@ install.packages("qqman")library(qqman) #以assoc分析資料繪圖results_as 
 R 程式碼：
 
 ```
-#install.packages("qqman",repos="http://cran.cnr.berkeley.edu/",lib="\~" ) # location of installation can be changed but has to correspond with the library location#library("qqman",lib.loc="~")library(qqman)results_log <- read.table("logistic_results.assoc2.logistic", head=TRUE)jpeg("QQ-Plot_logistic.jpeg")qq(results_log$P, main = "Q-Q plot of GWAS p-values : log")dev.off()results_as <- read.table("assoc_results", head=TRUE)jpeg("QQ-Plot_assoc.jpeg")qq(results_as$P, main = "Q-Q plot of GWAS p-values : log")dev.off()
+#install.packages("qqman",repos="http://cran.cnr.berkeley.edu/",lib="\~" ) # location of installation can be changed but has to correspond with the library location
+#library("qqman",lib.loc="~")
+library(qqman)
+results_log <- read.table("logistic_results.assoc2.logistic", head=TRUE)
+jpeg("QQ-Plot_logistic.jpeg")
+qq(results_log$P, main = "Q-Q plot of GWAS p-values : log")
+dev.off()
+
+results_as <- read.table("assoc_results", head=TRUE)
+jpeg("QQ-Plot_assoc.jpeg")
+qq(results_as$P, main = "Q-Q plot of GWAS p-values : log")
+dev.off()
 ```
 | assoc结果： | logistic结果： |
 |---|---|
@@ -1314,7 +1497,18 @@ less -S re.assoc.linear
 ### **3. 使用R語言進行結果比較**
 
 ```
-library(data.table)geno=fread("hapmap2.raw",header=T)geno[1:10,1:20]phe=fread("qt.phe")cov=fread("pop.phe")head(phe)head(cov) dd=data.frame(phe$V3,cov$V3,geno[,7:20])head(dd)str(dd) mod_rs6681049=lm(phe.V3~cov.V3+rs6681049_1,data=dd)summary(mod_rs6681049)  #得到rs6681049的結果跟上面的一樣 p=0.725
+library(data.table)
+geno=fread("hapmap2.raw",header=T)
+geno[1:10,1:20]
+phe=fread("qt.phe")
+cov=fread("pop.phe")
+head(phe)
+head(cov) 
+dd=data.frame(phe$V3,cov$V3,geno[,7:20])
+head(dd)
+str(dd) 
+mod_rs6681049=lm(phe.V3~cov.V3+rs6681049_1,data=dd)
+summary(mod_rs6681049)  #得到rs6681049的結果跟上面的一樣 p=0.725
 ```
 ## step 11: Linear Model模型+因子協變量(類別共變數)
 
@@ -1374,7 +1568,9 @@ head samples.covar
 5. 第5-9欄:covariate 1~5
 
 ```
-#調整協變量檔案格式#只擷取出samples.covar資料裡的第1,2,5個欄位，並另存為cov1.txtawk '{print $1,$2,$5}' samples.covar >cov1.txt
+#調整協變量檔案格式
+#只擷取出samples.covar資料裡的第1,2,5個欄位，並另存為cov1.txt
+awk '{print $1,$2,$5}' samples.covar >cov1.txt
 ```
 ![Enter image alt description](Images/iFq_Image_131.png)
 產出的檔案如上
@@ -1454,12 +1650,23 @@ GWAS分析時，無論是一般線性模型，還是廣義線性模型，都要�
 這裡covariates檔為：
 
 ```
-[dengfei@ny 03_linear_cov]$ head cov.txt 1061 1061 F 31062 1062 M 31063 1063 F 31064 1064 F 31065 1065 F 31066 1066 F 31067 1067 F 31068 1068 M 31069 1069 M 31070 1070 M 3
+[dengfei@ny 03_linear_cov]$ head cov.txt 
+1061 1061 F 3
+1062 1062 M 3
+1063 1063 F 3
+1064 1064 F 3
+1065 1065 F 3
+1066 1066 F 3
+1067 1067 F 3
+1068 1068 M 3
+1069 1069 M 3
+1070 1070 M 3
 ```
 - 首先將F換為1，M換為2
 
 ```
-#sed語法格式為，s/regexp/replacement/[flags]，用來做字串的取代、複製、刪除處理 #s表是取代regexp: F要被取代的為引號F，replacement:1 表示替代的值為數值1，[flags]:g 表示全部取代 #下面兩段就是要將F編碼為1，M編碼為2 #-i 表示為修改檔案 sed 's/F/1/g' cov.txt >cov2.txtsed -i 's/M/2/g' cov2.txt
+#sed語法格式為，s/regexp/replacement/[flags]，用來做字串的取代、複製、刪除處理 #s表是取代regexp: F要被取代的為引號F，replacement:1 表示替代的值為數值1，[flags]:g 表示全部取代 #下面兩段就是要將F編碼為1，M編碼為2 #-i 表示為修改檔案 sed 's/F/1/g' cov.txt >cov2.txt
+sed -i 's/M/2/g' cov2.txt
 ```
 ![Enter image alt description](Images/IOH_Image_142.png)
 
@@ -1486,7 +1693,34 @@ plink --file adgwas --pheno phe.txt --allow-no-sex --linear --covar plink.cov --
 **「日誌：」**
 
 ```
-PLINK v1.90b5.3 64-bit (21 Feb 2018)           www.cog-genomics.org/plink/1.9/(C) 2005-2018 Shaun Purcell, Christopher Chang   GNU General Public License v3Logging to re.log.Options in effect:  --allow-no-sex  --covar plink.cov  --file b  --hide-covar  --linear  --out re  --pheno phe.txtNote: --hide-covar flag deprecated.  Use e.g. '--linear hide-covar'.515199 MB RAM detected; reserving 257599 MB for main workspace..ped scan complete (for binary autoconversion).Performing single-pass .bed write (10000 variants, 1500 people).--file: re-temporary.bed + re-temporary.bim + re-temporary.fam written.10000 variants loaded from .bim file.1500 people (0 males, 0 females, 1500 ambiguous) loaded from .fam.Ambiguous sex IDs written to re.nosex .1500 phenotype values present after --pheno.Using 1 thread (no multithreaded calculations invoked).--covar: 3 covariates loaded.Before main variant filters, 1500 founders and 0 nonfounders present.Calculating allele frequencies... done.10000 variants and 1500 people pass filters and QC.Phenotype data is quantitative.Writing linear model association results to re.assoc.linear ... done.
+PLINK v1.90b5.3 64-bit (21 Feb 2018)           www.cog-genomics.org/plink/1.9/
+(C) 2005-2018 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to re.log.
+Options in effect:
+  --allow-no-sex
+  --covar plink.cov
+  --file b
+  --hide-covar
+  --linear
+  --out re
+  --pheno phe.txt
+
+Note: --hide-covar flag deprecated.  Use e.g. '--linear hide-covar'.
+515199 MB RAM detected; reserving 257599 MB for main workspace.
+.ped scan complete (for binary autoconversion).
+Performing single-pass .bed write (10000 variants, 1500 people).
+--file: re-temporary.bed + re-temporary.bim + re-temporary.fam written.
+10000 variants loaded from .bim file.
+1500 people (0 males, 0 females, 1500 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to re.nosex .
+1500 phenotype values present after --pheno.
+Using 1 thread (no multithreaded calculations invoked).
+--covar: 3 covariates loaded.
+Before main variant filters, 1500 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+10000 variants and 1500 people pass filters and QC.
+Phenotype data is quantitative.
+Writing linear model association results to re.assoc.linear ... done.
 ```
 **「結果文件：」**re.assoc.linear
 
@@ -1497,7 +1731,15 @@ PLINK v1.90b5.3 64-bit (21 Feb 2018)           www.cog-genomics.org/plink/1.9/(
 ### **4. 使用R語言進行結果比较lm+factor**
 
 ```
-library(data.table)geno = fread("c.raw")geno[1:10,1:10]phe = fread("phe.txt")cov = fread("cov.txt")plink = fread("plink.cov")dd = data.frame(phe = phe$V3,cov1 = plink$COV1,cov2 = plink$COV2_4,cov3=plink$COV2_5,geno[,7:20])head(dd)mod_M7 = lm(phe ~ cov1+cov2+cov3 + M7_1,data=dd);summary(mod_M7)
+library(data.table)
+geno = fread("c.raw")
+geno[1:10,1:10]
+phe = fread("phe.txt")
+cov = fread("cov.txt")
+plink = fread("plink.cov")
+dd = data.frame(phe = phe$V3,cov1 = plink$COV1,cov2 = plink$COV2_4,cov3=plink$COV2_5,geno[,7:20])
+head(dd)
+mod_M7 = lm(phe ~ cov1+cov2+cov3 + M7_1,data=dd);summary(mod_M7)
 ```
 **「M7加上因子covariates结果：」**
 
@@ -1528,7 +1770,60 @@ Tutorial:[https://youtu.be/Zdp50Zu9LKk](https://youtu.be/Zdp50Zu9LKk)
 這是hereford牛品種的genotyping資料
 
 ```
-#以下程式用PLINK執行 ##轉換為二進位檔，且進行quality control ##更多QC參數請見link ## --file --make-bed 將map ped檔轉換為二進位檔bim bed fam ## --cow 指定物種 牛 ## --chr 只取第一個染色體 ## --mind 排除基因型缺失率高的個體h ## --geno 排除大部分受試者中缺失的SNP ## --maf 僅包括超過MAF閾值的SNP。 ## --hwe 排除偏離哈代-溫伯格平衡的指標 ## --out 輸出的檔案名稱   plink --file hereford --cow --chr 1 --mind 0.1 --geno 0.1 --maf 0.05 --hwe 0.0000001 --make-bed --out afterQC   ######################################### Options to compute LD with PLINK######################################### limited window - just nearby SNPs - default behaviorplink --bfile afterQC --cow --r2 --out resultLD1 ##預設的LD計算方式，只會計算兩個SNP間的距離要夠近   #LD計算結果儲存在resultLD1.ld，R2為R square #BP_A BP_B 為SNP_A SNP_B的base pair position  # --ld-window-r2 0 R aquare閥值設定為0，也就是顯示所有的R2 plink --bfile afterQC --cow --r2  --ld-window-r2 0 --out resultLD2 #限定僅計算兩個SNP相距2000 kb(--ld-window-kb)以內的且兩個SNPs距離不超過100(--ld-window)個SNPs      plink --bfile afterQC --cow --r2 --ld-window-r2 0 --ld-window 100 --ld-window-kb 2000 --out resultLD3 #若要計算大量的LD 這時候可以用gz 將結果檔案壓縮 plink --bfile afterQC --cow --r2 gz --ld-window-r2 0 --out resultLD4  #將LD檔案儲存成一個相關矩陣，比較花時間1-2分鐘，可以做LD heatmap  #當用所有的SNPs去計算LD score矩陣，檔案會無比的大，以此範例為15GB plink --bfile afterQC --cow --r2 square --out resultLD5   # compute the D'(D prime) measure of LDplink --bfile afterQC --cow --r2 dprime --out resultLD6    ######################################### visualize LD decay######################################## # example runplink --bfile afterQC --cow --r2 --ld-window 1000 --ld-window-kb 1000  --ld-window-r2 0 --out LdExample  #以下程式在R執行 setwd("C:\\Users\\greengarden\\Downloads\\hereford") #設定檔案路徑，路徑位置要修改 library(readr) library(dplyr) library(tidyverse) # read in LD results file LdValues <- read_table("LdExample.ld")  # calculate LD in 20 kb bins to display the trendlineaverageLD <- LdValues %>%  mutate(markerDistance = abs(BP_B - BP_A)/1000) %>%  dplyr::filter(markerDistance < 5000) %>%  mutate(intervals = cut_width(markerDistance, 20, boundary = 0)) %>%  group_by(intervals) %>%  summarise_at(vars(R2),funs(mean(., na.rm=TRUE))) %>%  rename(averageR2=R2) # calculate inter marker distancesfullLD <- LdValues %>%  mutate(markerDistance = abs(BP_B - BP_A)/1000) %>%  dplyr::filter(markerDistance < 5000) %>%  mutate(intervals = cut_width(markerDistance, 20, boundary = 0)) #merge the two data sets (full LD info and average per bin)mergedLD <- full_join(fullLD,averageLD, by = "intervals") # visualize LD decay 耗費記憶體若RAM不夠會當機  ggplot(mergedLD) +  geom_point(aes(x=markerDistance, y=R2)) +    geom_line(aes(x=markerDistance, y=averageR2), color="red", size=2)  ##上面是LD decay圖，可以看到大部分高R2發生在250kbp以下，所以表示可以設定計算SNPs的間距範圍為250kbp  #########################################以下在PLINK執行 # LD pruning -  remove SNPs with high LD with each other (removes one from each pair)# replace --nonfounders with --make-founders! ##如果資料裡面PID MID真的有資料，不是0，就要設定為--make-founders 表示考慮家族遺傳干擾因素，反之則設定為--nonfounders # --indep-pairwise 50 5 0.7，50表示計算與SNP距離50kbp以內的SNP，5個SNPs範圍內，R2>0.7的要排除  plink --bfile afterQC --cow --make-founders --indep-pairwise 50 5 0.7 --out afterQC.prune   #afterQC.prune.out 因為有跟其他SNP具有高度LD所以被移除的SNP名稱 #用--exclude指令移除afterQC.prune.out的SNP，另存為prunedSetplink --bfile afterQC --cow --exclude afterQC.prune.out --make-bed --out prunedSet 
+#以下程式用PLINK執行 ##轉換為二進位檔，且進行quality control ##更多QC參數請見link ## --file --make-bed 將map ped檔轉換為二進位檔bim bed fam ## --cow 指定物種 牛 ## --chr 只取第一個染色體 ## --mind 排除基因型缺失率高的個體h ## --geno 排除大部分受試者中缺失的SNP ## --maf 僅包括超過MAF閾值的SNP。 ## --hwe 排除偏離哈代-溫伯格平衡的指標 ## --out 輸出的檔案名稱   plink --file hereford --cow --chr 1 --mind 0.1 --geno 0.1 --maf 0.05 --hwe 0.0000001 --make-bed --out afterQC  
+ 
+########################################
+# Options to compute LD with PLINK
+########################################
+# limited window - just nearby SNPs - default behavior
+plink --bfile afterQC --cow --r2 --out resultLD1
+ ##預設的LD計算方式，只會計算兩個SNP間的距離要夠近   #LD計算結果儲存在resultLD1.ld，R2為R square #BP_A BP_B 為SNP_A SNP_B的base pair position  # --ld-window-r2 0 R aquare閥值設定為0，也就是顯示所有的R2 plink --bfile afterQC --cow --r2  --ld-window-r2 0 --out resultLD2
+ 
+#限定僅計算兩個SNP相距2000 kb(--ld-window-kb)以內的且兩個SNPs距離不超過100(--ld-window)個SNPs      plink --bfile afterQC --cow --r2 --ld-window-r2 0 --ld-window 100 --ld-window-kb 2000 --out resultLD3
+ 
+#若要計算大量的LD 這時候可以用gz 將結果檔案壓縮 plink --bfile afterQC --cow --r2 gz --ld-window-r2 0 --out resultLD4
+  #將LD檔案儲存成一個相關矩陣，比較花時間1-2分鐘，可以做LD heatmap  #當用所有的SNPs去計算LD score矩陣，檔案會無比的大，以此範例為15GB plink --bfile afterQC --cow --r2 square --out resultLD5  
+ # compute the D'(D prime) measure of LD
+plink --bfile afterQC --cow --r2 dprime --out resultLD6
+   
+ 
+########################################
+# visualize LD decay
+########################################
+ 
+# example run
+plink --bfile afterQC --cow --r2 --ld-window 1000 --ld-window-kb 1000  --ld-window-r2 0 --out LdExample
+ 
+ #以下程式在R執行 setwd("C:\\Users\\greengarden\\Downloads\\hereford") #設定檔案路徑，路徑位置要修改 library(readr) library(dplyr) library(tidyverse) # read in LD results file LdValues <- read_table("LdExample.ld")  
+# calculate LD in 20 kb bins to display the trendline
+averageLD <- LdValues %>%
+  mutate(markerDistance = abs(BP_B - BP_A)/1000) %>%
+  dplyr::filter(markerDistance < 5000) %>%
+  mutate(intervals = cut_width(markerDistance, 20, boundary = 0)) %>%
+  group_by(intervals) %>%
+  summarise_at(vars(R2),funs(mean(., na.rm=TRUE))) %>%
+  rename(averageR2=R2)
+ 
+# calculate inter marker distances
+fullLD <- LdValues %>%
+  mutate(markerDistance = abs(BP_B - BP_A)/1000) %>%
+  dplyr::filter(markerDistance < 5000) %>%
+  mutate(intervals = cut_width(markerDistance, 20, boundary = 0))
+ 
+#merge the two data sets (full LD info and average per bin)
+mergedLD <- full_join(fullLD,averageLD, by = "intervals")
+ 
+# visualize LD decay 耗費記憶體若RAM不夠會當機
+  ggplot(mergedLD) +
+  geom_point(aes(x=markerDistance, y=R2)) +
+    geom_line(aes(x=markerDistance, y=averageR2), color="red", size=2)
+  ##上面是LD decay圖，可以看到大部分高R2發生在250kbp以下，所以表示可以設定計算SNPs的間距範圍為250kbp  
+########################################
+#以下在PLINK執行 
+# LD pruning -  remove SNPs with high LD with each other (removes one from each pair)
+# replace --nonfounders with --make-founders! ##如果資料裡面PID MID真的有資料，不是0，就要設定為--make-founders 表示考慮家族遺傳干擾因素，反之則設定為--nonfounders # --indep-pairwise 50 5 0.7，50表示計算與SNP距離50kbp以內的SNP，5個SNPs範圍內，R2>0.7的要排除  plink --bfile afterQC --cow --make-founders --indep-pairwise 50 5 0.7 --out afterQC.prune   #afterQC.prune.out 因為有跟其他SNP具有高度LD所以被移除的SNP名稱 
+#用--exclude指令移除afterQC.prune.out的SNP，另存為prunedSet
+plink --bfile afterQC --cow --exclude afterQC.prune.out --make-bed --out prunedSet 
 ```
 
 Tutorial：[plink --bfile mydata --ld rs2840528 rs7545940](https://zzz.bwh.harvard.edu/plink/ld.shtml)
@@ -1606,7 +1901,12 @@ The default for --ld-window-r2 is set at 0.2 to reduce the size of output files 
 To obtain all LD values for a set of SNPs versus one specific SNP, use the --ld-snp command in conjunction with --r2. For example, to get a list of all values for every SNP within 1Mb of rs12345, use the command
 
 ```
-#會顯示與rs12345相距1000 kb(--ld-window-kb)以內的且SNPs個數距離不超過99999(--ld-window)個SNPs的SNP    plink --file mydata           --r2           --ld-snp rs12345           --ld-window-kb 1000           --ld-window 99999           --ld-window-r2 0
+#會顯示與rs12345相距1000 kb(--ld-window-kb)以內的且SNPs個數距離不超過99999(--ld-window)個SNPs的SNP    plink --file mydata 
+          --r2 
+          --ld-snp rs12345 
+          --ld-window-kb 1000 
+          --ld-window 99999 
+          --ld-window-r2 0
 ```
 The --ld-window and --ld-window-r2 commands effectively means that output will be shown for *all* other SNPs within 1Mb of rs12345.
 
@@ -1770,7 +2070,40 @@ CHR          BP1          BP2           KB  NSNPS SNPS \
 [https://sfustatgen.github.io/LDheatmap/reference/LDheatmap.html](https://sfustatgen.github.io/LDheatmap/reference/LDheatmap.html)
 
 ```
-# Pass LDheatmap a SnpMatrix objectset.seed(1)#make an example matrix of genotypes, coded as 0, 1 2 copies of an index allelegdat<-matrix(rbinom(n=500,size=2,prob=.5),ncol=5)gdat ##第一次執行要安裝套件 #BiocManager::install("snpStats") #BiocManager::install("LDheatmap") require(snpStats)require(LDheatmap)gdat<-as(gdat,"SnpMatrix")#> object has no names - using numeric order for row/column namesLDheatmap(gdat,genetic.distances=c(0,1000,3000,4000,10000))#Load the package's data setdata("CEUSNP")data("CEUDist")#Creates a data frame "CEUSNP" of genotype data and a vector "CEUDist"#of physical locations of the SNPs# Produce a heat map in a grey color schemeMyHeatmap <- LDheatmap(CEUSNP, genetic.distances = CEUDist,                       color = grey.colors(20))# Same heatmap, flipped below a horizontal gene map -- for examples of# adding genomic annotation tracks to a flipped heatmap see# vignette("addTracks")# flippedHeatmap<-LDheatmap(MyHeatmap,flip=TRUE)# Prompt the user before starting a new page of graphics output# and save the original prompt settings in old.prompt.old.prompt <- devAskNewPage(ask = TRUE)# Highlight a certain LD block of interest:LDheatmap.highlight(MyHeatmap, i = 3, j = 8, col = "black",                    fill = "grey",flipOutline=FALSE, crissCross=FALSE)# Plot a symbol in the center of the pixel which represents LD between# the fourth and seventh SNPs:LDheatmap.marks(MyHeatmap,  4,  7,  gp=grid::gpar(cex=2),  pch = "*")
+# Pass LDheatmap a SnpMatrix object
+set.seed(1)
+#make an example matrix of genotypes, coded as 0, 1 2 copies of an index allele
+gdat<-matrix(rbinom(n=500,size=2,prob=.5),ncol=5)
+gdat ##第一次執行要安裝套件 #BiocManager::install("snpStats") #BiocManager::install("LDheatmap") require(snpStats)
+require(LDheatmap)
+
+gdat<-as(gdat,"SnpMatrix")
+#> object has no names - using numeric order for row/column names
+LDheatmap(gdat,genetic.distances=c(0,1000,3000,4000,10000))
+
+
+#Load the package's data set
+data("CEUSNP")
+data("CEUDist")
+
+#Creates a data frame "CEUSNP" of genotype data and a vector "CEUDist"
+#of physical locations of the SNPs
+# Produce a heat map in a grey color scheme
+MyHeatmap <- LDheatmap(CEUSNP, genetic.distances = CEUDist,
+                       color = grey.colors(20))
+# Same heatmap, flipped below a horizontal gene map -- for examples of
+# adding genomic annotation tracks to a flipped heatmap see
+# vignette("addTracks")
+# flippedHeatmap<-LDheatmap(MyHeatmap,flip=TRUE)
+# Prompt the user before starting a new page of graphics output
+# and save the original prompt settings in old.prompt.
+old.prompt <- devAskNewPage(ask = TRUE)
+# Highlight a certain LD block of interest:
+LDheatmap.highlight(MyHeatmap, i = 3, j = 8, col = "black",
+                    fill = "grey",flipOutline=FALSE, crissCross=FALSE)
+# Plot a symbol in the center of the pixel which represents LD between
+# the fourth and seventh SNPs:
+LDheatmap.marks(MyHeatmap,  4,  7,  gp=grid::gpar(cex=2),  pch = "*")
 ```
 ## Step 14-LD Plot - Haploview
 
@@ -1847,7 +2180,8 @@ CLASSPATH變數名字，可以大寫也可以小寫。注意不要忘記變數�
 在cmd視窗輸入以下指令打開Haploview
 
 ```
-cd 檔案路徑java -jar Haploview4.1.jar
+cd 檔案路徑
+java -jar Haploview4.1.jar
 ```
 ![Enter image alt description](Images/lQr_Image_164.png)
 打開後的Haploview介面如上
@@ -1865,14 +2199,16 @@ step 3:從map檔中取出SNP id及 base pair position
 需要的範例檔案名稱: **adgwas.bim、adgwas.bed、adgwas.fam**
 
 ```
-#step1—----------------------------------------------------------- #取出第六條染色體 1000000-2000000 base pair位置的資料並轉為[--recode] block1.map、block1.ped檔 plink --bfile adgwas --chr 6 --from-bp 1000000 --to-bp 2000000 --recode --out block1 #將map的第二列和第四列擷取出來，並儲存為a1.info檔，ped數據保持不變。awk '{print $2,$4}' block1.map >block1.info
+#step1—----------------------------------------------------------- #取出第六條染色體 1000000-2000000 base pair位置的資料並轉為[--recode] block1.map、block1.ped檔 plink --bfile adgwas --chr 6 --from-bp 1000000 --to-bp 2000000 --recode --out block1 #將map的第二列和第四列擷取出來，並儲存為a1.info檔，ped數據保持不變。
+awk '{print $2,$4}' block1.map >block1.info
 ```
 在本範例直接[下載範例檔案](https://drive.google.com/drive/folders/1NKT9j9YEGm124SEQbNWKQtqUgCI_rQDk?usp=sharing)。
 
 用windows cmd 檢視檔案內容
 
 ```
-cd 檔案位置路徑 less -S block1.ped
+cd 檔案位置路徑 
+less -S block1.ped
 ```
 ![Enter image alt description](Images/tmr_Image_165.png)
 
@@ -1927,7 +2263,11 @@ less -S block1.info
 [https://zhuanlan.zhihu.com/p/345007586](https://zhuanlan.zhihu.com/p/345007586)
 
 ```
-library(CMplot)library(data.table)data(pig60K)dat <- data.table(pig60K)head(dat)  #trait1、trait2、trait3分別代表每一圈 #方形曼哈頓圖 CMplot(dat[sample(1:nrow(dat), 10000),c(1:4)],plot.type="m",        threshold=c(0.01,0.05)/nrow(dat),threshold.col=c('red','orange'),        multracks=FALSE, multraits=FALSE, chr.den.col=NULL, file.output=FALSE)  #圓形曼哈頓圖 CMplot(dat,plot.type="c",        chr.labels=paste("Chr",c(1:18,"X","Y"),sep=""),        r=0.4,outward=FALSE,        cir.chr.h=1.3,        chr.den.col="black",file="jpg",        main="Title",dpi=300,file.output=TRUE,verbose=TRUE)  #因為數據有三個trait 所以可以畫出3個圖  #SNP密度圖 CMplot(dat,plot.type="d",     bin.size=1e6, chr.den.col=c("lightseagreen","darkgoldenrod3","brown3"))   #圓形曼哈頓密度圖 sigSNP=dat[trait1<0.000001,]  #trait1就是p value，篩選出p<0.000001的資料 CMplot(dat,plot.type="c",        r=0.4,        chr.labels=paste("Chr",c(1:18,"X","Y"),sep=""),         threshold=c(1e-5,1e-4),        highlight = sigSNP$SNP ,        highlight.text = paste(sigSNP$SNP,"; trait2", sprintf("%.1f",sigSNP$trait2)) ,signal.pch=c(8,19),        cir.chr.h=1.5,        amplify=T,threshold.lty=c(1,2),threshold.col=c("red","blue"),        signal.line = c(1,2) ,signal.col=c("red","orange"),        chr.den.col=c("lightseagreen","darkgoldenrod3","brown3"),         bin.size=1e6,outward=FALSE,file="jpg",        dpi=300,file.output=TRUE,verbose=TRUE) 
+library(CMplot)
+library(data.table)
+data(pig60K)
+dat <- data.table(pig60K)
+head(dat)  #trait1、trait2、trait3分別代表每一圈 #方形曼哈頓圖 CMplot(dat[sample(1:nrow(dat), 10000),c(1:4)],plot.type="m",        threshold=c(0.01,0.05)/nrow(dat),threshold.col=c('red','orange'),        multracks=FALSE, multraits=FALSE, chr.den.col=NULL, file.output=FALSE)  #圓形曼哈頓圖 CMplot(dat,plot.type="c",        chr.labels=paste("Chr",c(1:18,"X","Y"),sep=""),        r=0.4,outward=FALSE,        cir.chr.h=1.3,        chr.den.col="black",file="jpg",        main="Title",dpi=300,file.output=TRUE,verbose=TRUE)  #因為數據有三個trait 所以可以畫出3個圖  #SNP密度圖 CMplot(dat,plot.type="d",     bin.size=1e6, chr.den.col=c("lightseagreen","darkgoldenrod3","brown3"))   #圓形曼哈頓密度圖 sigSNP=dat[trait1<0.000001,]  #trait1就是p value，篩選出p<0.000001的資料 CMplot(dat,plot.type="c",        r=0.4,        chr.labels=paste("Chr",c(1:18,"X","Y"),sep=""),         threshold=c(1e-5,1e-4),        highlight = sigSNP$SNP ,        highlight.text = paste(sigSNP$SNP,"; trait2", sprintf("%.1f",sigSNP$trait2)) ,signal.pch=c(8,19),        cir.chr.h=1.5,        amplify=T,threshold.lty=c(1,2),threshold.col=c("red","blue"),        signal.line = c(1,2) ,signal.col=c("red","orange"),        chr.den.col=c("lightseagreen","darkgoldenrod3","brown3"),         bin.size=1e6,outward=FALSE,file="jpg",        dpi=300,file.output=TRUE,verbose=TRUE) 
 ```
 ## Step 17: PRS (Polygenic risk score)
 
@@ -1955,7 +2295,9 @@ When the effect size relates to disease risk and is thus given as an odds ratio 
 **[R code]**
 
 ```
-library(data.table) #將之前分析所得的OR轉換為Beta值 dat <- read.table(gzfile("Height.QC.gz"), header=T) head(dat) dat$BETA <- log(dat$OR) write.table(dat, "Height.QC.Transformed", quote=F, row.names=F) 
+library(data.table) #將之前分析所得的OR轉換為Beta值 dat <- read.table(gzfile("Height.QC.gz"), header=T) head(dat) 
+dat$BETA <- log(dat$OR) 
+write.table(dat, "Height.QC.Transformed", quote=F, row.names=F) 
 ```
 ### **Clumping**
 
@@ -1963,7 +2305,15 @@ Linkage disequilibrium, which corresponds to the correlation between the genotyp
 **[Plink]**
 
 ```
-plink \    --bfile EUR.QC \ #參照的LD reference bfile    --clump-p1 1 \    --clump-r2 0.1 \    --clump-kb 250 \    --clump Height.QC.Transformed \ #要進行clumping的目標    --clump-snp-field SNP \    --clump-field P \    --out EUR #如果是在R plink環境，請執行以下程式碼 system("plink --bfile EUR.QC --clump-p1 1 --clump-r2 0.1 --clump-kb 250 --clump Height.QC.Transformed --clump-snp-field SNP --clump-field P --out EUR")
+plink \
+    --bfile EUR.QC \ #參照的LD reference bfile
+    --clump-p1 1 \
+    --clump-r2 0.1 \
+    --clump-kb 250 \
+    --clump Height.QC.Transformed \ #要進行clumping的目標
+    --clump-snp-field SNP \
+    --clump-field P \
+    --out EUR #如果是在R plink環境，請執行以下程式碼 system("plink --bfile EUR.QC --clump-p1 1 --clump-r2 0.1 --clump-kb 250 --clump Height.QC.Transformed --clump-snp-field SNP --clump-field P --out EUR")
 ```
 | Parameter | Value | Description |
 |---|---|---|
@@ -2008,7 +2358,13 @@ We will need three files:
 [Plink]
 
 ```
-echo "0.001 0 0.001" > range_list #寫入第一筆資料時要用">"echo "0.05 0 0.05" >> range_listecho "0.1 0 0.1" >> range_listecho "0.2 0 0.2" >> range_listecho "0.3 0 0.3" >> range_listecho "0.4 0 0.4" >> range_listecho "0.5 0 0.5" >> range_list
+echo "0.001 0 0.001" > range_list #寫入第一筆資料時要用">"
+echo "0.05 0 0.05" >> range_list
+echo "0.1 0 0.1" >> range_list
+echo "0.2 0 0.2" >> range_list
+echo "0.3 0 0.3" >> range_list
+echo "0.4 0 0.4" >> range_list
+echo "0.5 0 0.5" >> range_list
 ```
 ![Enter image alt description](Images/om7_Image_186.png)
 #上述範圍的三個數字分別為，名稱、範圍的下限、範圍的上限 \
@@ -2019,7 +2375,12 @@ note:The threshold boundaries are inclusive. For example, for the 0.05 threshold
 We can then calculate the PRS with the following plink command:
 
 ```
-plink \    --bfile EUR.QC \    --score Height.QC.Transformed 3 4 12 header \     --q-score-range range_list SNP.pvalue \    --extract EUR.valid.snp \    --out EUR #如果是在R環境下，請執行以下指令 system("plink --bfile EUR.QC --score Height.QC.Transformed 3 4 12 header --q-score-range range_list SNP.pvalue --extract EUR.valid.snp --out EUR")
+plink \
+    --bfile EUR.QC \
+    --score Height.QC.Transformed 3 4 12 header \ 
+    --q-score-range range_list SNP.pvalue \
+    --extract EUR.valid.snp \
+    --out EUR #如果是在R環境下，請執行以下指令 system("plink --bfile EUR.QC --score Height.QC.Transformed 3 4 12 header --q-score-range range_list SNP.pvalue --extract EUR.valid.snp --out EUR")
 ```
 ![Enter image alt description](Images/TBL_Image_187.png)
 The meaning of the new parameters are as follows:
@@ -2052,7 +2413,46 @@ The above command and range_list will generate 7 files:
 通常情況下，事先我們並不知道最優的P值閾值，所以在計算完成多組PRS後，為了找到最適閾值，需要對PRS進行回歸分析，然後選取能夠解釋最多表型方差的P值閾值。
 
 ```
-p.threshold <- c(0.001,0.05,0.1,0.2,0.3,0.4,0.5)# Read in the phenotype filephenotype <- read.table("EUR.height", header=T) head(phenotype )  # Read in the PCspcs <- read.table("EUR.eigenvec", header=F)  # The default output from plink does not include a header# To make things simple, we will add the appropriate headers# (1:6 because there are 6 PCs)colnames(pcs) <- c("FID", "IID", paste0("PC",1:6)) head(pcs)  # Read in the covariates (here, it is sex)covariate <- read.table("EUR.cov", header=T) head(covariate )  # Now merge the filespheno <- merge(merge(phenotype, covariate, by=c("FID", "IID")), pcs, by=c("FID","IID")) head(pheno) # We can then calculate the null model (model with PRS) using a linear regression# (as height is quantitative)null.model <- lm(Height~., data=pheno[,!colnames(pheno)%in%c("FID","IID")])# And the R2 of the null model isnull.r2 <- summary(null.model)$r.squaredprs.result <- NULLfor(i in p.threshold){    # Go through each p-value threshold    prs <- read.table(paste0("EUR.",i,".profile"), header=T)    # Merge the prs with the phenotype matrix    # We only want the FID, IID and PRS from the PRS file, therefore we only select the    # relevant columns    pheno.prs <- merge(pheno, prs[,c("FID","IID", "SCORE")], by=c("FID", "IID"))    # Now perform a linear regression on Height with PRS and the covariates    # ignoring the FID and IID from our model    model <- lm(Height~., data=pheno.prs[,!colnames(pheno.prs)%in%c("FID","IID")])    # model R2 is obtained as    model.r2 <- summary(model)$r.squared    # R2 of PRS is simply calculated as the model R2 minus the null R2    prs.r2 <- model.r2-null.r2    # We can also obtain the coeffcient and p-value of association of PRS as follow    prs.coef <- summary(model)$coeff["SCORE",]    prs.beta <- as.numeric(prs.coef[1])    prs.se <- as.numeric(prs.coef[2])    prs.p <- as.numeric(prs.coef[4])    # We can then store the results    prs.result <- rbind(prs.result, data.frame(Threshold=i, R2=prs.r2, P=prs.p, BETA=prs.beta,SE=prs.se))} prs.result  # Best result is:prs.result[which.max(prs.result$R2),]
+p.threshold <- c(0.001,0.05,0.1,0.2,0.3,0.4,0.5)
+# Read in the phenotype file
+phenotype <- read.table("EUR.height", header=T) head(phenotype )  # Read in the PCs
+pcs <- read.table("EUR.eigenvec", header=F)  # The default output from plink does not include a header
+# To make things simple, we will add the appropriate headers
+# (1:6 because there are 6 PCs)
+colnames(pcs) <- c("FID", "IID", paste0("PC",1:6)) head(pcs) 
+ # Read in the covariates (here, it is sex)
+covariate <- read.table("EUR.cov", header=T) head(covariate )  # Now merge the files
+pheno <- merge(merge(phenotype, covariate, by=c("FID", "IID")), pcs, by=c("FID","IID")) head(pheno) 
+# We can then calculate the null model (model with PRS) using a linear regression
+# (as height is quantitative)
+null.model <- lm(Height~., data=pheno[,!colnames(pheno)%in%c("FID","IID")])
+# And the R2 of the null model is
+null.r2 <- summary(null.model)$r.squared
+prs.result <- NULL
+for(i in p.threshold){
+    # Go through each p-value threshold
+    prs <- read.table(paste0("EUR.",i,".profile"), header=T)
+    # Merge the prs with the phenotype matrix
+    # We only want the FID, IID and PRS from the PRS file, therefore we only select the
+    # relevant columns
+    pheno.prs <- merge(pheno, prs[,c("FID","IID", "SCORE")], by=c("FID", "IID"))
+    # Now perform a linear regression on Height with PRS and the covariates
+    # ignoring the FID and IID from our model
+    model <- lm(Height~., data=pheno.prs[,!colnames(pheno.prs)%in%c("FID","IID")])
+    # model R2 is obtained as
+    model.r2 <- summary(model)$r.squared
+    # R2 of PRS is simply calculated as the model R2 minus the null R2
+    prs.r2 <- model.r2-null.r2
+    # We can also obtain the coeffcient and p-value of association of PRS as follow
+    prs.coef <- summary(model)$coeff["SCORE",]
+    prs.beta <- as.numeric(prs.coef[1])
+    prs.se <- as.numeric(prs.coef[2])
+    prs.p <- as.numeric(prs.coef[4])
+    # We can then store the results
+    prs.result <- rbind(prs.result, data.frame(Threshold=i, R2=prs.r2, P=prs.p, BETA=prs.beta,SE=prs.se))
+} prs.result  
+# Best result is:
+prs.result[which.max(prs.result$R2),]
 ```
 ![Enter image alt description](Images/7M5_Image_189.png)
 
@@ -2136,17 +2536,43 @@ FID        IID       Height HG00096 HG00096 169.132168767547 HG00097 HG00097 171
 各種可以應用的參數
 
 ```
-#通过欄名指定位置--snp SNP --chr CHR --bp BP --A1 A1 --A2 A2 --stat OR --pvalue P#或者通过欄位位置指定--snp 0 --chr 1 --bp 2 --A1 3 --A2 4 --stat 5 --pvalue 7 --index
+#通过欄名指定位置
+--snp SNP --chr CHR --bp BP --A1 A1 --A2 A2 --stat OR --pvalue P
+#或者通过欄位位置指定
+--snp 0 --chr 1 --bp 2 --A1 3 --A2 4 --stat 5 --pvalue 7 --index
 ```
 以下程式要在terminal及"04_PRS"路徑下執行
 
 ```
-#\ 多行連結符號，注意\符號後面不能有空格，不然會出錯 Rscript PRSice.R --dir .\  --prsice PRSice_win64.exe \  --base Height.QC.gz \  --target EUR.QC \        --binary-target F \       --pheno EUR.height \     --cov EUR.cov \  --base-maf MAF:0.01 \  --base-info INFO:0.8 \  --stat OR \  --or \   --out EUR
+#\ 多行連結符號，注意\符號後面不能有空格，不然會出錯 Rscript PRSice.R --dir .\
+  --prsice PRSice_win64.exe \
+  --base Height.QC.gz \
+  --target EUR.QC \      
+  --binary-target F \     
+  --pheno EUR.height \   
+  --cov EUR.cov \
+  --base-maf MAF:0.01 \
+  --base-info INFO:0.8 \
+  --stat OR \
+  --or \ 
+  --out EUR
 ```
 假設你的資料是連續特徵值
 
 ```
-#\ 多行連結符號Rscript PRSice.R --dir . \  --prsice PRSice_win64.exe \  --base Height.QC.gz \   #GWA summary data  --target EUR.QC \       #bfile data  --binary-target F \       --pheno EUR.height \    #phenotype data  --cov EUR.cov \  --base-maf MAF:0.01 \  --base-info INFO:0.8 \  --stat BETA \  --beta \ #與--beta只能二擇一 表示關聯數據是  --out EUR
+#\ 多行連結符號
+Rscript PRSice.R --dir . \
+  --prsice PRSice_win64.exe \
+  --base Height.QC.gz \   #GWA summary data
+  --target EUR.QC \       #bfile data
+  --binary-target F \     
+  --pheno EUR.height \    #phenotype data
+  --cov EUR.cov \
+  --base-maf MAF:0.01 \
+  --base-info INFO:0.8 \
+  --stat BETA \
+  --beta \ #與--beta只能二擇一 表示關聯數據是
+  --out EUR
 ```
 | Paramter | Value | Description |
 |---|---|---|
@@ -2211,12 +2637,31 @@ PRSice2採用了第三種方法，通過permutation 來計算經驗p值
 第一個副檔名為.prsice文件為各個C+T參數的模型的結果：
 
 ```
-head EUR.prsice Pheno   Set Threshold   R2  P   Coefficient Standard.Error  Num_SNP-   Base	5e-08   0.0192512   0.000644758 563.907 164.163 1999-   Base	5.005e-05   0.0619554   5.24437e-10 3080.12 485.501 7615-   Base	0.00010005  0.0713244   2.27942e-11 3816.99 557.044 9047-   Base	0.00015005  0.0785205   2.00391e-12 4362.01 603.601 10014-   Base	0.00020005  0.0799241   1.24411e-12 4666.13 639.344 10756-   Base	0.00025005  0.0820088   6.11958e-13 4947.48 668.217 11365-   Base	0.00030005  0.0818422   6.47686e-13 5146.63 695.905 11884-   Base	0.00035005  0.0836689   3.47353e-13 5392.8  720.237 12373-   Base	0.00040005  0.0849879   2.21299e-13 5589.41 739.972 12817
+head EUR.prsice 
+Pheno   Set Threshold   R2  P   Coefficient Standard.Error  Num_SNP
+-   Base	5e-08   0.0192512   0.000644758 563.907 164.163 1999
+-   Base	5.005e-05   0.0619554   5.24437e-10 3080.12 485.501 7615
+-   Base	0.00010005  0.0713244   2.27942e-11 3816.99 557.044 9047
+-   Base	0.00015005  0.0785205   2.00391e-12 4362.01 603.601 10014
+-   Base	0.00020005  0.0799241   1.24411e-12 4666.13 639.344 10756
+-   Base	0.00025005  0.0820088   6.11958e-13 4947.48 668.217 11365
+-   Base	0.00030005  0.0818422   6.47686e-13 5146.63 695.905 11884
+-   Base	0.00035005  0.0836689   3.47353e-13 5392.8  720.237 12373
+-   Base	0.00040005  0.0849879   2.21299e-13 5589.41 739.972 12817
 ```
 第二個副檔名為.best的文件則為**使用最優模型計算得到的target樣本的PRS值**
 
 ```
-head EUR.best FID IID In_Regression PRSHG00096 HG00096 Yes -1.90234673e-05HG00097 HG00097 Yes 1.27505253e-05HG00099 HG00099 Yes -3.46628033e-06HG00101 HG00101 Yes 9.02490969e-06HG00102 HG00102 Yes 1.69546146e-05HG00103 HG00103 Yes 1.91180157e-05HG00105 HG00105 Yes 4.62832238e-06HG00107 HG00107 Yes 7.59715813e-07HG00108 HG00108 Yes 1.25453063e-05
+head EUR.best FID IID In_Regression PRS
+HG00096 HG00096 Yes -1.90234673e-05
+HG00097 HG00097 Yes 1.27505253e-05
+HG00099 HG00099 Yes -3.46628033e-06
+HG00101 HG00101 Yes 9.02490969e-06
+HG00102 HG00102 Yes 1.69546146e-05
+HG00103 HG00103 Yes 1.91180157e-05
+HG00105 HG00105 Yes 4.62832238e-06
+HG00107 HG00107 Yes 7.59715813e-07
+HG00108 HG00108 Yes 1.25453063e-05
 ```
 上面的PRS就是每個個案的風險指數
 ## Step 18: Pathway-based PRS
